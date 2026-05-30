@@ -1,0 +1,32 @@
+class Solution {
+    public List<Boolean> getResults(int[][] queries) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        List<Integer> block=new ArrayList<>();
+        List<Boolean> ans=new ArrayList<>();
+        block.add(0);
+        for(int[] arr:queries){
+            if(arr[0]==1){
+                block.add(arr[1]);
+            }
+            else{
+                int max=arr[1];
+                int size=arr[2];
+                block.add(max);
+                boolean added=false;
+                Collections.sort(block);
+                for(int i=1;i<block.size();i++){
+                    if(block.get(i)<=max && block.get(i)-block.get(i-1)>=size){
+                        added=true;
+                        ans.add(true);
+                        break;
+                    }
+                }
+                if(block.size()==1 && !added && size<=max) ans.add(true);
+                else if(!added) ans.add(false);
+                block.remove(block.indexOf(max));
+                    
+            }
+        }
+        return ans;
+    }
+}
