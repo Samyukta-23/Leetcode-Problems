@@ -10,7 +10,7 @@ class Solution {
                 }
             }
 
-            System.out.println("ind :"+ind);
+            // System.out.println("ind :"+ind);
 
             if(ind==-1){
                for(int i=ind+1;i<nums.length/2;i++){
@@ -29,7 +29,7 @@ class Solution {
                     }
                 }
             }
-            System.out.println("Swap :"+swap);
+            // System.out.println("Swap :"+swap);
             int temp=nums[ind];
             nums[ind]=nums[swap];
             nums[swap]=temp;
