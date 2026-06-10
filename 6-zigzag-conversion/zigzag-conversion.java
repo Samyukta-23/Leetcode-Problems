@@ -29,12 +29,9 @@ class Solution {
                 k--;
             }
         }
-
         for(int i=0;i<numRows;i++){
             ans.append(map.get(i));
         }
-
         return ans.toString();
-
     }
 }
