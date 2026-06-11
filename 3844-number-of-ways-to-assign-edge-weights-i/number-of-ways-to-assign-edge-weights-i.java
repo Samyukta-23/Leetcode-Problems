@@ -1,6 +1,5 @@
 class Solution {
     int max_depth=0;
-    long MOD = 1000000007L;
     public int assignEdgeWeights(int[][] edges) {
         HashMap<Integer,ArrayList<Integer>> map= new HashMap<>();
         for(int i=0;i<=edges.length+1;i++){
