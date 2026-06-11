@@ -14,7 +14,6 @@ class Solution {
         boolean[] vis=new boolean[edges.length+2];
         vis[1]=true;
         traversal(1,0,vis,map);
-        // return (int) modPow(2, max_depth-1);
         return (int) format(2,max_depth-1);
     }
 
@@ -35,18 +34,6 @@ class Solution {
             if(ans>=1000000007){
                 ans%=1000000007;
             }
-        }
-        return ans;
-    }
-
-    long modPow(long base, long exp) {
-        long ans = 1;
-        while (exp > 0) {
-            if ((exp & 1) == 1) {
-                ans = (ans * base) % MOD;
-            }
-            base = (base * base) % MOD;
-            exp >>= 1;
         }
         return ans;
     }
