@@ -1,0 +1,51 @@
+class Solution {
+
+    int max_depth=0;
+
+    public int[] assignEdgeWeights(int[][] edges, int[][] queries) {
+        int[] ans=new int[queries.length];
+        int k=0;
+        HashMap<Integer,ArrayList<Integer>> map=new HashMap<>();
+        for(int[] arr:edges){
+            map.putIfAbsent(arr[0],new ArrayList<>());
+            map.putIfAbsent(arr[1],new ArrayList<>());
+            map.get(arr[0]).add(arr[1]);
+            map.get(arr[1]).add(arr[0]);
+        }
+        for(int[] query : queries){
+            max_depth=0;
+            boolean[] vis=new boolean[map.size()+3];
+            traversal(0,query[0],query[1],vis,map);
+            if(max_depth==0)ans[k++]=0;
+            else ans[k++]=(int)(format(max_depth-1));
+        }
+        System.out.print(map);
+        return ans;
+    }
+
+    void traversal(int depth,int node,int v,boolean[] vis,HashMap<Integer,ArrayList<Integer>> map){
+        vis[node]=true;
+        if(node==v){
+            max_depth=depth;
+            return;
+        } 
+        for(int nei:map.get(node)){
+            if(!vis[nei]){
+                traversal(depth+1,nei,v,vis,map);
+            }
+        }
+        
+    }
+
+    long format(long pow){
+        long res=1;
+        for(int i=1;i<=pow;i++){
+            res*=2;
+            if(res>=1000000007){
+                res%=1000000007;
+            }
+        }
+        return res;
+    }
+    
+}
