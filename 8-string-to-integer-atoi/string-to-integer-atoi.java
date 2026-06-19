@@ -1,46 +1,23 @@
 class Solution {
     public int myAtoi(String s) {
-        char[] arr=s.toCharArray();
         int i=0;
-        boolean neg=false;
-        while(i<arr.length && arr[i]==' '){
-            arr[i]='#';
+        int sign=1;
+        int sum=0;
+        while(i<s.length() && s.charAt(i)==' ') i++;
+        if(i<s.length() && (s.charAt(i)=='-' || s.charAt(i)=='+')){
+            if(s.charAt(i)=='-') sign=-1;
             i++;
         }
-        if(i<arr.length && (arr[i]=='-'||arr[i]=='+')){
-            if(arr[i]=='-') neg=true;
-            arr[i]='#';
-            i++;
-        }
+        return helper(s,i,sum,sign);
+    }
 
-        while(i<arr.length && arr[i]=='0'){
-            arr[i]='#';
-            i++;
+    int helper(String str,int i,long res,int sign){
+        if(i>=str.length() || (str.charAt(i)>'9' || str.charAt(i)<'0')){
+            return (int)(sign*res);
         }
-
-        while(i<arr.length && ( arr[i]>='0' && arr[i]<='9')){
-            i++;
-        }
-
-        for(int j=i;j<arr.length;j++){
-            arr[j]='#';
-        }
-
-        StringBuilder str=new StringBuilder();
-        for(char ch:arr){
-            if(ch!='#'){
-                str.append(ch);
-            }
-        }
-        if(str.length()==0) return 0;
-        if(str.length()>10){
-            if(neg) return -2147483648;
-            return 2147483647;
-        }
-        long num=Long.parseLong(str.toString());
-        if(neg) num*=-1;
-        if(num>=2147483647) return 2147483647;
-        if(num<=-2147483648) return -2147483648;
-        return (int)num;
+        res=res*10+(str.charAt(i)-'0');
+        if(res*sign<=-2147483648) return -2147483648;
+        if(res*sign>=2147483647) return 2147483647;
+        return helper(str,i+1,res,sign);
     }
 }
