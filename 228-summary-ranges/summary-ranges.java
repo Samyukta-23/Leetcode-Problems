@@ -35,7 +35,6 @@ class Solution {
         else{
             list.add(nums[fi-cnt]+"->"+nums[nums.length-1]);
         }
-        System.out.print(cnt+" FIR"+fi);
         return list;
     }
 }
