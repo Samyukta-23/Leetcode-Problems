@@ -207,10 +207,6 @@ class Solution {
         }
         char[] sort=ans.toString().toCharArray();
         Arrays.sort(sort);
-        ans=new StringBuilder();
-        for(char ch:sort){
-            ans.append(ch);
-        }
-        return ans.toString();
+        return Arrays.toString(sort).replace(",","").replace("[","").replace("]","").replace(" ","");
     }
 }
