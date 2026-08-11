@@ -1,29 +1,22 @@
 class Solution {
     public int minDistance(String word1, String word2) {
-        int[][] dp=new int[word1.length()][word2.length()];
-        for(int[] arr:dp){
-            Arrays.fill(arr,-1);
+        int[][] dp=new int[word1.length()+1][word2.length()+1];
+        for(int i=0;i<=word1.length();i++){
+            dp[i][0]=i;
         }
-        return helper(word1.length()-1,word2.length()-1,word1,word2,dp);
-    }
-
-    int helper(int i,int j, String s1,String s2,int[][] dp){
-        if(i<0 && j<0) return 0;
-        if(i<0){
-            return 1+helper(i,j-1,s1,s2,dp);
+        for(int i=0;i<=word2.length();i++){
+            dp[0][i]=i;
         }
-        if(j<0){
-            return 1+helper(i-1,j,s1,s2,dp);
+        for(int i=1;i<=word1.length();i++){
+            for(int j=1;j<=word2.length();j++){
+                if(word1.charAt(i-1)==word2.charAt(j-1)){
+                    dp[i][j]=dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j]=1+Math.min(dp[i-1][j],dp[i][j-1]);            
+                }
+            }
         }
-        if(dp[i][j]!=-1) return dp[i][j];
-        if(s1.charAt(i)==s2.charAt(j)){
-            return helper(i-1,j-1,s1,s2,dp);
-        }
-        else{
-            int left=1+helper(i-1,j,s1,s2,dp);
-            int right=1+helper(i,j-1,s1,s2,dp);
-            return dp[i][j]=Math.min(left,right);
-        }
-        
+        return dp[word1.length()][word2.length()];
     }
 }
